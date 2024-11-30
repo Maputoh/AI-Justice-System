@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+ <link rel="stylesheet" href="{{ url_for('static', filename='sytles.css') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Outcome and Check Bias</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="file"], input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function showPredictionOutcome() {
+            let formData = new FormData(document.getElementById("prediction-form"));
+            fetch("/predict", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);  // Display the result in a pop-up
+            });
+        }
+
+        function checkBias() {
+            let formData = new FormData(document.getElementById("bias-form"));
+            fetch("/check_bias", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);  // Display the bias result in a pop-up
+            });
+        }
+    </script>
+</head>
+<body class="predict-bg">
+
+<div class="container">
+    <h1>Predict Outcome</h1>
+    <form id="prediction-form" enctype="multipart/form-data">
+        <label for="case_file">Upload Case File (Optional):</label>
+        <input type="file" id="case_file" name="case_file">
+
+        <label for="case_number">Enter Case Number (Optional):</label>
+        <input type="text" id="case_number" name="case_number">
+
+        <label for="race">Race:</label>
+        <input type="text" id="race" name="race" required>
+
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender" required>
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" required>
+
+        <label for="case_type">Case Type:</label>
+        <input type="text" id="case_type" name="case_type" required>
+
+        <button type="button" onclick="showPredictionOutcome()">Predict Outcome</button>
+    </form>
+</div>
+
+<div class="container" style="margin-top: 40px;">
+    <h2>Check for Bias</h2>
+    <form id="bias-form">
+        <label for="scenario">Enter Scenario:</label>
+        <textarea id="scenario" name="scenario" rows="4" required></textarea>
+
+        <button type="button" onclick="checkBias()">Check Bias</button>
+    </form>
+</div>
+
+</bodyi>
+</html>

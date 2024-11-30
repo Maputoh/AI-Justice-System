@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Guidance</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body class="information-bg">
+    <div class="container">
+        <h1>Legal Guidance System</h1>
+        <p>Ask any legal-related question, and our system will scrape the web to provide guidance based on relevant information.</p>
+
+        <!-- Question form -->
+        <form id="questionForm">
+            <label for="question">Enter your question:</label>
+            <textarea id="question" name="question" rows="4" cols="50" placeholder="Ask about your rights, legal process, etc."></textarea>
+            <br>
+            <input type="submit" value="Get Guidance">
+        </form>
+
+        <!-- Response Section -->
+        <div id="responseContainer">
+            <h3>Guidance Response:</h3>
+            <p id="responseText">The answer to your legal question will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for handling form submission and updating the response dynamically
+        const form = document.getElementById('questionForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission
+
+            const question = document.getElementById('question').value;
+            fetch('/get_guidance', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ question })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the response text with the answer received from the server
+                document.getElementById('responseText').innerText = data.message;
+            })
+            .catch(error => {
+                // Show error message if request fails
+                document.getElementById('responseText').innerText = 'Error getting guidance. Please try again.';
+            });
+        });
+    </script>
+</body>
+</html>

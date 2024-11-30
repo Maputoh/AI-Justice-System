@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='sytles.css') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Justice System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f4;
+            background-image: url("");
+            background-size: cover;
+            background-repeat;
+            margin: -1;
+            padding: -1;
+            text-align: center;
+        }
+        header {
+            background-color: #3CAF50;
+
+            color: white;
+            padding: 19px;
+            font-size: 23px;
+        }
+        .container {
+            margin-top: 99px;
+        }
+        button {
+            background-color: #3CAF50;
+            color: white;
+            padding: 14px 30px;
+            font-size: 17px;
+            border: none;
+            border-radius: 4px;
+            margin: 9px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #44a049;
+        }
+        .button-container {
+            margin: -1 auto;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="index-bg" >
+
+<header>
+    <h1>Welcome to the AI Justice System</h1>
+    <p>Providing legal support and insights for fair and unbiased outcomes</p>
+</header>
+
+<div class="container">
+    <div class="button-container">
+        <!-- Button to go to the page for bias prediction -->
+        <button onclick="location.href='/predict_page'">Check Bias & Predict Outcome</button>
+
+        <!-- Button to go to the page for legal guidance -->
+        <button onclick="location.href='/legal_guidance'">Legal Information & Guidance</button>
+    </div>
+</div>
+<div class="guidance">
+    <h2>Legal Guidance</h2>
+    <p><b>If you are unsure about your rights or the legal process, the AI Justice System can offer basic advice based on the case details you provide. For complex legal matters, we recommend seeking professional legal counsel.</p>
+    <p><b>Note: This system does not replace the advice of a licensed attorney. It provides insights based on past legal outcomes and data.</p>
+</div>S
+
+
+</body>
+</html>
